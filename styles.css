@@ -1,0 +1,36 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: transparent;
+}
+
+.timer {
+  text-align: center;
+}
+
+.time {
+  font-size: 3rem;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 1rem;
+}
+
+.button {
+  background-color: transparent;
+  color: black;
+  border: 2px solid black;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 0.5rem;
+}
+
+.button.active {
+  background-color: black;
+  color: white;
+}
+
