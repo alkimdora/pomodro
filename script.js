@@ -2,8 +2,9 @@ const timeDisplay = document.getElementById('time');
 const pomodoroButton = document.getElementById('pomodoro');
 const shortBreakButton = document.getElementById('shortBreak');
 const longBreakButton = document.getElementById('longBreak');
+const startStopButton = document.getElementById('startStop');
 
-let time = 25 * 60; // Default time is 25 minutes
+let time = 25 * 60; // Varsayılan süre 25 dakika
 let timer;
 let isActive = false;
 
@@ -17,36 +18,48 @@ function startTimer(duration) {
   if (isActive) {
     clearInterval(timer);
     isActive = false;
-    updateDisplay();
-    pomodoroButton.classList.remove('active');
-    shortBreakButton.classList.remove('active');
-    longBreakButton.classList.remove('active');
+    startStopButton.textContent = 'Start';
+    startStopButton.classList.remove('active');
   } else {
     clearInterval(timer);
     time = duration * 60;
     updateDisplay();
     isActive = true;
-    pomodoroButton.classList.add('active');
-    shortBreakButton.classList.add('active');
-    longBreakButton.classList.add('active');
+    startStopButton.textContent = 'Stop';
+    startStopButton.classList.add('active');
     timer = setInterval(() => {
       time--;
       if (time < 0) {
         clearInterval(timer);
         time = 0;
         isActive = false;
-        updateDisplay();
-        pomodoroButton.classList.remove('active');
-        shortBreakButton.classList.remove('active');
-        longBreakButton.classList.remove('active');
-      } else {
-        updateDisplay();
+        startStopButton.textContent = 'Start';
+        startStopButton.classList.remove('active');
       }
+      updateDisplay();
     }, 1000);
   }
 }
 
-pomodoroButton.addEventListener('click', () => startTimer(25));
-shortBreakButton.addEventListener('click', () => startTimer(5));
-longBreakButton.addEventListener('click', () => startTimer(10));
+pomodoroButton.addEventListener('click', () => {
+  time = 25 * 60;
+  updateDisplay();
+});
+
+shortBreakButton.addEventListener('click', () => {
+  time = 5 * 60;
+  updateDisplay();
+});
+
+longBreakButton.addEventListener('click', () => {
+  time = 10 * 60;
+  updateDisplay();
+});
+
+startStopButton.addEventListener('click', () => {
+  if (time > 0) {
+    startTimer(time / 60);
+  }
+});
+
 updateDisplay();
